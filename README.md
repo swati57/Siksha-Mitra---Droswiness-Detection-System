@@ -17,6 +17,7 @@ HTML, CSS, javascript, python, flask
 ### Installation guide:
 
 Open the project folder in VSCode.
+Python and pip should be installed.
 
 Install virtualenv
 ```shell
