@@ -63,7 +63,6 @@ pip install keras
 ```
 
 
-### Information about the project:
 To run the flask project, run app.py
 To open your default browser to the rendered page, Ctrl+click the http://127.0.0.1:5000/ URL in the terminal.
 index.html file is the main page and detection_page.html is the second page.
