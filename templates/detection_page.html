@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Drowsiness Detection and Tips</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet"
+              href="{{ url_for('static', filename='css/quote_style.css') }}">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    </head>
+    <body>
+        <div class="detection">
+            <center>
+                <form action="/">
+                    <div class="jumbotron" id="cimg" value="" src="images/logo.png"></div>
+                </form>
+                <br>
+                <div class="container">
+                    <button class="button-1"
+                            id='start'
+                            name
+                            camera_switch
+                            value
+                            1
+                            onClick="start();smoothScroll(document.getElementById('quotes'))">
+                        Start
+                    </button>
+                    <button class="button-2" id="stop" name = "camera_switch" value = "0" onClick="stop()">Stop</button>
+                </div>
+            </center>
+        </div>
+        <div class="carousel" id="quotes">
+            <div class="carousel__nav">
+                <span id="moveLeft" class="carousel__arrow">
+                    <svg class="carousel__icon" width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"></path>
+                    </svg>
+                </span>
+                <span id="moveRight" class="carousel__arrow">
+                    <svg class="carousel__icon"  width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"></path>
+                    </svg>
+                </span>
+            </div>
+            {% for i in range(0, 5): %}
+                {% set content=quotes[ range(0, 18) | random ].split(' , ') %}
+                <div class="carousel-item carousel-item--{{ i+1 }}">
+                    <div class="carousel-item__image"></div>
+                    <div class="carousel-item__info">
+                        <div class="carousel-item__container">
+                            <h2 class="carousel-item__subtitle">Some Tips For You</h2>
+                            <h1 class="carousel-item__title">{{ content[0] }}</h1>
+                            <p class="carousel-item__description">{{ content[1] }}</p>
+                            <a href="{{ content[2][:-1] }}"
+                               class="carousel-item__btn"
+                               target="_blank">Read the article</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="second">
+            <div class="wrapper ">
+                <h1 style="text-align: center;">Quote of the Day</h1>
+                <div class="content">
+                    <div class="quote-area">
+                        <i class="fas fa-quote-left"></i>
+                        <p class="quote">Never give up because you never know if the next try is going to be the one that works.</p>
+                        <i class="fas fa-quote-right"></i>
+                    </div>
+                    <div class="author">
+                        <span>__</span>
+                        <span class="name">Mary Kay Ash</span>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <div class="features">
+                        <ul>
+                            <li class="speech">
+                                <i class="fas fa-volume-up"></i>
+                            </li>
+                            <li class="copy">
+                                <i class="fas fa-copy"></i>
+                            </li>
+                            <li class="twitter">
+                                <i class="fab fa-twitter"></i>
+                            </li>
+                        </ul>
+                        <button class="newQuote">New Quote</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <script>
+            function start(){             
+                    document.getElementById('cimg').innerHTML=
+                        '<img src="{{ url_for('video',camera_switch=1) }}" width="100%"/>'                              
+                      }
+            
+            
+            function stop(){  
+                window.location.reload();
+                document.getElementById('cimg').innerHTML=
+                    '<img src="{{ url_for('video',camera_switch=0) }}" width="100%"/>'                
+                }  
+                
+                window.smoothScroll = function(target) {
+                    var scrollContainer = target;
+                    do {
+                        scrollContainer = scrollContainer.parentNode;
+                        if (!scrollContainer) return;
+                        scrollContainer.scrollTop += 1;
+                    } while (scrollContainer.scrollTop == 0);
+                
+                    var targetY = 0;
+                    do { 
+                        if (target == scrollContainer) break;
+                        targetY += target.offsetTop;
+                    } while (target = target.offsetParent);
+                
+                    scroll = function(c, a, b, i) {
+                        i++; if (i > 30) return;
+                        c.scrollTop = a + (b - a) / 30 * i;
+                        setTimeout(function(){ scroll(c, a, b, i); }, 20);
+                    }
+                  
+                    scroll(scrollContainer, scrollContainer.scrollTop, targetY, 0);
+                }
+    </script>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+    <script src="{{ url_for('static', filename='js/quotes.js') }}"></script>
+</html>
