@@ -14,6 +14,9 @@ The webpages are designed using HTML, CSS. The interaction between the webpage i
 ### TechStacks Used: 👨‍💻
 HTML, CSS, javascript, python, flask
 
+### Video Presentation: 
+https://drive.google.com/file/d/1muxQ9VnFzNCpRj0RsWFQLNxT0EKnrLAP/view?usp=sharing
+
 ### Installation guide:
 
 Open the project folder in VSCode.
